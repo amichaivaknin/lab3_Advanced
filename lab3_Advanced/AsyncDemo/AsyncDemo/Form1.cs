@@ -12,6 +12,7 @@ namespace AsyncDemo
 {
     public partial class Form1 : Form
     {
+        // bad name
         internal delegate IEnumerable<int> PrimesDelegate(int num1, int num2);
        
 
@@ -26,6 +27,7 @@ namespace AsyncDemo
             primesList.Items.Clear();
             int number1;
             int number2;
+            // extract try parse to different method
             if (!int.TryParse(num1.Text,out number1))
             {
                 primesList.Items.Add("Wrong number1, int only");
@@ -44,6 +46,7 @@ namespace AsyncDemo
         private void CallBack(PrimesDelegate pd, IAsyncResult ar)
         {
             var list = pd.EndInvoke(ar);
+            // Invoke = synchronic, beginInvoke = asynchronic
             primesList.Invoke(new Action(() =>
             {
                 foreach (var prime in list)
